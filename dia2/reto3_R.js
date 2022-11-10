@@ -25,7 +25,7 @@ let persona = {
     surname : "",
     age : "",
 }
-
+// // THEN / CATCH //////
 
 // question("introduce tu nombre: ")
 // .then((name) => {
