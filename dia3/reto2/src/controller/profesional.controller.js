@@ -33,10 +33,10 @@ function postProfesional(request, response)
     console.log(request.body)
     if (profesional === null)
     {
-        profesional = {nombre: request.body.name,
-                        edad: request.body.age,
-                        peso: request.body.weight,
-                        altura: request.body.height}
+        profesional = new Professional(request.body.name,
+                                        request.body.age,
+                                        request.body.weight,
+                                        request.body.height)
         respuesta = {error: false, codigo: 200,
                     mensaje: 'Profesional creado', resultado: profesional};                
     }    
