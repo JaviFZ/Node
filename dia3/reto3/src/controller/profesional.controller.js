@@ -2,23 +2,18 @@
 const {Professional} = require("../profesional")
 
 
-let profesional = null;
+let profesionales = [];
 
 // let profesional1 = new Professional("Juan", 23, 70, 180);
-
-function getStart(request, response) 
-{
-    let respuesta = {error: true, codigo:200, mensaje: 'punto de inicio'};
-    response.send(respuesta);    
-};
-
 
 
 function getProfesional(request, response) 
 {
+    let prof = request.query.id
     let respuesta;
-    if (profesional != null)
-        respuesta = profesional;
+    if (profesionales[prof] != null){
+        respuesta = profesionales[prof];
+    }
     else
         respuesta = {error: true, codigo: 200, mensaje: "El profesional no existe"}
         
@@ -26,44 +21,54 @@ function getProfesional(request, response)
 };
 
 
+function getProfesionales(request, response) {
+    let respuesta = profesionales;
+    response.send(respuesta)
+}
+
 
 function postProfesional(request, response) 
 {
+    let newProf = new Professional 
+    (
+        request.body.name,
+        request.body.age,
+        request.body.weight,
+        request.body.height
+    );
     let respuesta;
-    console.log(request.body)
-    if (profesional === null)
-    {
-        profesional = {nombre: request.body.name,
-                        edad: request.body.date,
-                        peso: request.body.weight,
-                        altura: request.body.height}
-        respuesta = {error: false, codigo: 200,
-                    mensaje: 'Profesional creado', resultado: profesional};                
+    console.log(request.body);
+    if (newProf !== null){
+        profesionales.push(newProf);
+        respuesta = {error: false, codigo: 200,mensaje: 'Profesional creado', resultado: newProf }; 
+    } else {
+        respuesta = { error: true, codigo: 200, mensaje: 'El Profesional ya existe', resultado: null };
     }    
-    else 
-        respuesta = {error: true, codigo: 200,
-                    mensaje: 'El profesional ya existe', resultado: null};
-               
-    response.send(respuesta);                
+    response.send(respuesta);          
 };
 
 
 
 function putProfesional(request, response)
 {
-    let respuesta
-    if (profesional != null)
+    let respuesta;
+    let prof = request.query.id
+    let newProf = new Professional
+    (
+        request.body.name,
+        request.body.age,
+        request.body.weight,
+        request.body.height,
+    )
+    if (profesionales[prof] != null)
     {
-        profesional.nombre = request.body.name;
-        profesional.edad   = request.body.age;
-        profesional.peso   = request.body.weight;
-        profesional.altura = request.body.height;
+        profesionales[prof] = newProf
         respuesta          = {error: false, codigo: 200,
-                            mensaje: 'Profesional actualizado', resultado: profesional};
+                            mensaje: 'Profesional actualizado', resultado: newProf};
     }
     else
         respuesta = {error: true, codigo: 200,
-                    mensaje: 'El profesional no existe', resultado: profesional};
+                    mensaje: 'El profesional no existe', resultado: newProf};
                     
     response.send(respuesta);
 };
@@ -73,19 +78,19 @@ function putProfesional(request, response)
 function deleteProfesional(request, response) 
 {
     let respuesta
-    if(profesional != null)
+    let prof = request.query.id
+    if(profesionales[prof] != null)
     {
-        profesional = null;
-        respuesta   = {error: false, codigo: 200,
-                    mensaje: 'Profesional borrado', resultado: profesional};
+        profesionales[prof] = null;
+        respuesta   = {error: false, codigo: 200, mensaje: 'Profesional borrado'};
     }    
     else
-        respuesta   = {error: true, codigo: 200,
-                    mensaje: 'El profesional no existe', resultado: profesional};
+        respuesta   = {error: true, codigo: 200, mensaje: 'El profesional no existe', resultado: profesionales[prof]};
 
     response.send(respuesta);
 };
 
 
 
-module.exports = {getStart, getProfesional, postProfesional, putProfesional, deleteProfesional};
+
+module.exports = {getProfesional, postProfesional, putProfesional, deleteProfesional, getProfesionales};
