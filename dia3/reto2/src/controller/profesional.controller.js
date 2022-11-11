@@ -54,10 +54,10 @@ function putProfesional(request, response)
     let respuesta
     if (profesional != null)
     {
-        profesional.nombre = request.body.name;
-        profesional.edad   = request.body.age;
-        profesional.peso   = request.body.weight;
-        profesional.altura = request.body.height;
+        profesional.name = request.body.name;
+        profesional.age   = request.body.age;
+        profesional.weight   = request.body.weight;
+        profesional.height = request.body.height;
         respuesta          = {error: false, codigo: 200,
                             mensaje: 'Profesional actualizado', resultado: profesional};
     }
