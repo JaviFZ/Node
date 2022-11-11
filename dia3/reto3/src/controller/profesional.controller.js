@@ -2,9 +2,9 @@
 const {Professional} = require("../profesional")
 
 
-let profesional = null;
+let profesionales = [];
 
-// let profesional1 = new Professional("Juan", 23, 70, 180);
+
 
 function getStart(request, response) 
 {
@@ -14,11 +14,11 @@ function getStart(request, response)
 
 
 
-function getProfesional(request, response) 
+function getProfesionales(request, response) 
 {
     let respuesta;
-    if (profesional != null)
-        respuesta = profesional;
+    if (profesionales != null)
+        respuesta = profesionales;
     else
         respuesta = {error: true, codigo: 200, mensaje: "El profesional no existe"}
         
@@ -27,16 +27,17 @@ function getProfesional(request, response)
 
 
 
-function postProfesional(request, response) 
+function postProfesionales(request, response) 
 {
+    let profesional = request.query.id;
     let respuesta;
-    console.log(request.body)
-    if (profesional === null)
+
+    if (profesional != null && (!id || id === profesional.id))
     {
-        profesional = {nombre: request.body.name,
-                        edad: request.body.date,
-                        peso: request.body.weight,
-                        altura: request.body.height}
+        profesional = {nombre: request.query.name,
+                        edad: request.query.age,
+                        peso: request.query.weight,
+                        altura: request.query.height}
         respuesta = {error: false, codigo: 200,
                     mensaje: 'Profesional creado', resultado: profesional};                
     }    
@@ -88,4 +89,4 @@ function deleteProfesional(request, response)
 
 
 
-module.exports = {getStart, getProfesional, postProfesional, putProfesional, deleteProfesional};
+module.exports = {getStart, getProfesionales, postProfesionales, putProfesional, deleteProfesional};

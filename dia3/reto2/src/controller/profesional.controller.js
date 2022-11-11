@@ -34,7 +34,7 @@ function postProfesional(request, response)
     if (profesional === null)
     {
         profesional = {nombre: request.body.name,
-                        edad: request.body.date,
+                        edad: request.body.age,
                         peso: request.body.weight,
                         altura: request.body.height}
         respuesta = {error: false, codigo: 200,
