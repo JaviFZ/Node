@@ -5,9 +5,9 @@ const profesionalsCtrl = require("../controller/profesional.controller")
 
 
 
- router.get("/profesional", profesionalsCtrl.getProfesional);
+router.get("/profesional", profesionalsCtrl.getProfesional);
 
- router.get("/profesionales", profesionalsCtrl.getProfesionales);
+router.get("/profesionales", profesionalsCtrl.getProfesionales);
 
 router.post("/profesional", profesionalsCtrl.postProfesional);
 
