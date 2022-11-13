@@ -1,5 +1,15 @@
 
-const {Professional} = require("../reto1/profesional")
+// const {Professional} = require("./profesional")
+class Professional {
+    
+    constructor(name, age, weight, height){
+        this.name = name;
+        this.age = age;
+        this.weight = weight;
+        this.height = height;
+        
+    }
+}    
 
 
 // FUNCION VALIDAR PARA QUE LOS PROFESIONALES SE CREEN CON TODOS LOS CAMPOS
@@ -89,7 +99,13 @@ function postProfesional()
 
 function getProfesionales()
 {
-    let url = "http://localhost:3000/profesional";
+
+    let lista = document.getElementById("profesionales");  
+    lista.innerHTML=""
+    const id = document.getElementById("id").value;
+    if(id){
+
+        let url = "http://localhost:3000/profesional?id="+id;
 
     let param = 
     {
@@ -105,8 +121,15 @@ function getProfesionales()
     .then(function(result)
     {      
         if (!result.error)
-        {
-            document.getElementById("muestra").value = result;
+        {      
+              
+        // console.log(solicitud);                                
+        lista.innerHTML += `<p>Nombre: ${result.name} <br>  
+                            Edad: ${result.age}<br>
+                            Altura: ${result.height}<br>
+                            Peso: ${result.weight}<br>
+                            </p>`
+                                                        
         }
         else
             showToast("ERROR: " +  result.mensaje, "bg-danger")
@@ -116,7 +139,44 @@ function getProfesionales()
     {
         console.log(error)
     })
+    } else {
+        let url = "http://localhost:3000/profesionales";
+
+    let param = 
+    {
+        headers: {"Content-type": "application/json; charset= UTF-8"},
+        method: "GET"
+    }
+
+    fetch(url, param)
+    .then(function(data)
+    {
+        return data.json()
+    })
+    .then(function(result)
+    {      
+        if (!result.error)
+        {        
+
+    result.forEach(function (profesional) {               
+        // console.log(solicitud);                                
+        lista.innerHTML += `<p>Nombre: ${profesional.name} <br>  
+                            Edad: ${profesional.age}<br>
+                            Altura: ${profesional.height}<br>
+                            Peso: ${profesional.weight}<br>
+                            </p>`
+    })                                                       
+        }
+        else
+            showToast("ERROR: " +  result.mensaje, "bg-danger")
+
+    })
+    .catch(function(error)
+    {
+        console.log(error)
+    })
+    }
+
+    
 }
 
-
-module.exports = {postProfesional, getProfesionales}
