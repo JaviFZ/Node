@@ -64,9 +64,8 @@ function PokemonStats(stats) {
 
 
 function NotFound() {
-    pokeName.textContent = 'No encontrado';
-    pokeImg.setAttribute('src', 'pngjoy.com_pokedex-pokemon-pokedex-hd-png-download_15734846.png');
-    pokeImg.style.background =  '#fff';
+    pokeName.textContent = 'Pokemon no encontrado';
+    pokeImg.setAttribute('src', 'sadpika.png');
     pokeTypes.innerHTML = '';
     pokeStats.innerHTML = '';
     pokeId.textContent = '';
