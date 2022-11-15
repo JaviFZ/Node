@@ -124,10 +124,10 @@ function getProfesionales()
         {      
               
         // console.log(solicitud);                                
-        lista.innerHTML += `<p>Nombre: ${result.name} <br>  
-                            Edad: ${result.age}<br>
-                            Altura: ${result.height}<br>
-                            Peso: ${result.weight}<br>
+        lista.innerHTML += `<p>Nombre: ${result[id].name} <br>  
+                            Edad: ${result[id].age}<br>
+                            Altura: ${result[id].height}<br>
+                            Peso: ${result[id].weight}<br>
                             </p>`
                                                         
         }
