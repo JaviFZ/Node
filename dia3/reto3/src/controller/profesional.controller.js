@@ -7,24 +7,26 @@ let profesionales = [];
 // let profesional1 = new Professional("Juan", 23, 70, 180);
 
 
-function getProfesional(request, response) 
+
+
+
+function getProfesionales(request, response) 
 {
-    let prof = request.query.id
+    let prof = request.body.id
     let respuesta;
-    if (profesionales[prof] != null){
+
+    if(prof == null){
+        respuesta = profesionales;
+       
+    }
+    else if (profesionales[prof] != null){
         respuesta = profesionales[prof];
     }
-    else
+    else{
         respuesta = {error: true, codigo: 200, mensaje: "El profesional no existe"}
-        
+    } 
     response.send(respuesta);
 };
-
-
-function getProfesionales(request, response) {
-    let respuesta = profesionales;
-    response.send(respuesta)
-}
 
 
 function postProfesional(request, response) 
@@ -52,7 +54,7 @@ function postProfesional(request, response)
 function putProfesional(request, response)
 {
     let respuesta;
-    let prof = request.query.id
+    let prof = request.body.id
     let newProf = new Professional
     (
         request.body.name,
@@ -78,10 +80,10 @@ function putProfesional(request, response)
 function deleteProfesional(request, response) 
 {
     let respuesta
-    let prof = request.query.id
+    let prof = request.body.id
     if(profesionales[prof] != null)
     {
-        profesionales[prof] = null;
+        profesionales.splice([prof], 1);
         respuesta   = {error: false, codigo: 200, mensaje: 'Profesional borrado'};
     }    
     else
@@ -93,4 +95,4 @@ function deleteProfesional(request, response)
 
 
 
-module.exports = {getProfesional, postProfesional, putProfesional, deleteProfesional, getProfesionales};
+module.exports = { postProfesional, putProfesional, deleteProfesional, getProfesionales};
