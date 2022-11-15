@@ -62,6 +62,18 @@ function putProfesional(request, response)
         request.body.weight,
         request.body.height,
     )
+    // if(request.body.name == null ){
+    //     return request.query.name;
+    // }
+    // else if(!request.body.age == null){
+    //     return request.query.age;
+    // }    
+    // else if(!request.body.weight== null){
+    //     return request.query.weight;
+    // }
+    // else if(!request.body.name== null){
+    //     return request.query.height;
+    // }
     if (profesionales[prof] != null)
     {
         profesionales[prof] = newProf
