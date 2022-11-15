@@ -63,7 +63,7 @@ function postProfesional()
                         document.getElementById("altura").value,
                         document.getElementById("peso").value,)
     
-    const url = "http://localhost:3000/profesional";
+    const url = "http://localhost:3000/profesionales";
 
     if (validar(profesional))
     {
@@ -105,7 +105,7 @@ function getProfesionales()
     let id = document.getElementById("id").value;
     if(id){
 
-        let url = "http://localhost:3000/profesional?id="+id;
+        let url = "http://localhost:3000/profesionales?id="+id;
 
     let param = 
     {
@@ -196,12 +196,12 @@ function putProfesional() {
     //     return newName = name;
     // }
     
-    let url = "http://localhost:3000/profesional?id="+ id
+    let url = "http://localhost:3000/profesionales?id="+ id
     
     if (id != "") {
         fetch(url, param)
         .then((data) => {
-    return data.json();
+        return data.json();
         })
         .then((data) => {
           console.log(data);
@@ -228,7 +228,7 @@ function deleteProfesional() {
   
     };
   
-    let url = "http://localhost:3000/profesional?id="+id
+    let url = "http://localhost:3000/profesionales?id="+id
   
     if (id) {
         fetch(url,param)
