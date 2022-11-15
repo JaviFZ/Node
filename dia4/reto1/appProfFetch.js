@@ -2,11 +2,11 @@
 // const {Professional} = require("./profesional")
 class Professional {
     
-    constructor(name, age, weight, height){
+    constructor(name, age, height ,weight){
         this.name = name;
         this.age = age;
-        this.weight = weight;
         this.height = height;
+        this.weight = weight;
         
     }
 }    
@@ -84,7 +84,7 @@ function postProfesional()
             if (result.error)
                 showToast("ERROR: " +  result.mensaje, "bg-danger")
             else
-                showToast("Usuario Creado Correctamente", "bg-success")
+                showToast("Profesional Creado Correctamente", "bg-success")
 
             console.log(result)
         })
@@ -102,7 +102,7 @@ function getProfesionales()
 
     let lista = document.getElementById("profesionales");  
     lista.innerHTML=""
-    const id = document.getElementById("id").value;
+    let id = document.getElementById("id").value;
     if(id){
 
         let url = "http://localhost:3000/profesional?id="+id;
@@ -178,5 +178,72 @@ function getProfesionales()
     }
 
     
+}
+
+function putProfesional() {
+    let newName = document.getElementById("nombre").value;
+    let newAge = document.getElementById("edad").value;
+    let newHeight = document.getElementById("altura").value;  
+    let newWeight = document.getElementById("peso").value;
+    let id = document.getElementById("id").value;
+    
+    let param = {headers: {"Content-type": "application/json; charset= UTF-8",},
+        method: "PUT",
+        body: JSON.stringify({name: newName, age: newAge, height: newHeight, weight: newWeight})
+            
+    };
+    // if(newName == null || newName == ""){
+    //     return newName = name;
+    // }
+    
+    let url = "http://localhost:3000/profesional?id="+ id
+    
+    if (id != "") {
+        fetch(url, param)
+        .then((data) => {
+    return data.json();
+        })
+        .then((data) => {
+          console.log(data);
+          showToast("Profesional Modificado Correctamente", "bg-success")
+        })
+        .catch((error) => {
+          console.log(error);
+          showToast("ERROR: " +  result.mensaje, "bg-danger")
+        })
+    
+    } else {
+        showToast("Rellena el campo Id", "bg-danger");
+    }
+}
+
+
+
+
+function deleteProfesional() {
+    let id = document.getElementById("id").value;
+  
+    let param = {headers: {"Content-type": "application/json; charset= UTF-8",},
+      method: "DELETE",
+  
+    };
+  
+    let url = "http://localhost:3000/profesional?id="+id
+  
+    if (id) {
+        fetch(url,param)
+        .then((data) =>{
+        return data.json()
+        })
+        .then((data) => {
+        console.log(data);
+        showToast("Profesional eliminado", "bg-success")
+        })
+        .catch((error) => {
+        console.log(error);
+        })
+    } else {
+        showToast("Rellena el campo id", "bg-danger");
+    }
 }
 
