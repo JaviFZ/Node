@@ -189,14 +189,11 @@ function putProfesional() {
     
     let param = {headers: {"Content-type": "application/json; charset= UTF-8",},
         method: "PUT",
-        body: JSON.stringify({name: newName, age: newAge, height: newHeight, weight: newWeight})
-            
+        body:JSON.stringify({name: newName, age: newAge, height: newHeight, weight: newWeight, id: id})
+        
     };
-    // if(newName == null || newName == ""){
-    //     return newName = name;
-    // }
-    
-    let url = "http://localhost:3000/profesionales?id="+ id
+ 
+    let url = "http://localhost:3000/profesionales"
     
     if (id != "") {
         fetch(url, param)
@@ -204,12 +201,12 @@ function putProfesional() {
         return data.json();
         })
         .then((data) => {
-          console.log(data);
+          console.log(data.resultado);
           showToast("Profesional Modificado Correctamente", "bg-success")
         })
         .catch((error) => {
           console.log(error);
-          showToast("ERROR: " +  result.mensaje, "bg-danger")
+          showToast("ERROR: " +  error.mensaje, "bg-danger")
         })
     
     } else {
@@ -222,21 +219,22 @@ function putProfesional() {
 
 function deleteProfesional() {
     let id = document.getElementById("id").value;
+    // console.log(id);
   
-    let param = {headers: {"Content-type": "application/json; charset= UTF-8",},
+    let param = {headers: {"Content-type": "application/json; charset= UTF-8"},
       method: "DELETE",
-  
+      body: JSON.stringify({id: id})
     };
   
-    let url = "http://localhost:3000/profesionales?id="+id
+    const url = "http://localhost:3000/profesionales";
   
-    if (id) {
+    if (id != "") {
         fetch(url,param)
         .then((data) =>{
         return data.json()
         })
         .then((data) => {
-        console.log(data);
+        // console.log(data);
         showToast("Profesional eliminado", "bg-success")
         })
         .catch((error) => {

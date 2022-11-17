@@ -91,6 +91,7 @@ function putProfesional(request, response)
 
 function deleteProfesional(request, response) 
 {
+    console.log(request.body.id);
     let respuesta
     let prof = request.body.id
     if(profesionales[prof] != null)
